@@ -1,0 +1,18 @@
+﻿@echo off
+setlocal
+chcp 65001 >nul
+cd /d "%~dp0"
+set PYTHONUTF8=1
+set PYTHONIOENCODING=utf-8
+
+where py >nul 2>nul
+if %errorlevel%==0 (
+    py -3 -m pip install -r requirements.txt
+    if errorlevel 1 pause & exit /b 1
+    py -3 app.py
+) else (
+    python -m pip install -r requirements.txt
+    if errorlevel 1 pause & exit /b 1
+    python app.py
+)
+pause
